@@ -7,18 +7,9 @@ namespace ResumeGenerator
 
 		public SkillsGenerator (string dirName) : base(ReplacementTags.SKILLS_TAG)
 		{
-			LoadXML (dirName);
+            html = "blurb";
 		}
 
-		private void LoadXML(string dirName)
-		{
-			
-		}
-
-		private void GenerateHtml(string dirName)
-		{
-			
-		}
 
 	}
 }

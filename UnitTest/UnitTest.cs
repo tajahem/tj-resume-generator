@@ -1,18 +1,14 @@
 ﻿using System;
 namespace UnitTests
 {
-    public class UnitTest
+    public abstract class UnitTest
     {
         public UnitTest()
         {
         }
-    }
 
-    class MainClass
-    {
-        public static void Main(string[] args)
-        {
-            GeneratorUnitTests gut = new GeneratorUnitTests();
-        }
+        public abstract void Setup();
+        public abstract bool Test();
+        public abstract void Cleanup();
     }
 }

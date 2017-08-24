@@ -29,7 +29,11 @@
   <ItemGroup>
     <Compile Include="AssertionTester.cs" />
     <Compile Include="GeneratorUnitTests.cs" />
+    <Compile Include="UnitTests.cs" />
     <Compile Include="UnitTest.cs" />
+    <Compile Include="GeneratorTests\LinksGeneratorTest.cs" />
+    <Compile Include="GeneratorTests\ContactGeneratorTest.cs" />
+    <Compile Include="GeneratorTests\XpGeneratorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -39,6 +43,9 @@
       <Project>{56BF96A2-AE47-429F-A15C-F80FF497A7DC}</Project>
       <Name>ResumeGenerator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GeneratorTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
