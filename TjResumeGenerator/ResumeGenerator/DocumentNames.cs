@@ -19,7 +19,7 @@ namespace ResumeGenerator
 		public const string CONTACT_DOC = "contact.xml";
         public const string GREETING_DOC = "greeting.xml";
         public const string SKILLS_DOC = "skills.xml";
-        public const string XP_DOC = "xp.xml";
+        public const string XP_DOC = "experience.xml";
         public const string LINKS_DOC = "links.xml";
 
 		// other documents

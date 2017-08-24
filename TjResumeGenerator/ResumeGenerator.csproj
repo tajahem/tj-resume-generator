@@ -48,6 +48,7 @@
     <Compile Include="ResumeGenerator\HtmlGenerators\GreetingGenerator.cs" />
     <Compile Include="ResumeGenerator\HtmlGenerators\HtmlGenerator.cs" />
     <Compile Include="ResumeGenerator\DocumentNames.cs" />
+    <Compile Include="ResumeGenerator\HtmlWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

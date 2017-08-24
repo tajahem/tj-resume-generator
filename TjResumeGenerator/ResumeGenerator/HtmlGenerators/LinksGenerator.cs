@@ -8,19 +8,22 @@ namespace ResumeGenerator
 		public LinksGenerator(string dirName) : base(ReplacementTags.LINKS_TAG)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load(dirName + FILE_NAME);
+            doc.Load(DocumentNames.GetPath(dirName, DocumentNames.LINKS_DOC));
 
-            base.html = "<div id=\"links-section\">\n";
+            HtmlWriter writer = new HtmlWriter();
+
+            writer.WriteBeginTagWithId("div", "links-section");
+
 
             XmlNodeList links = doc.SelectNodes("/links/link");
             foreach(XmlNode n in links){
-                base.html += "<a href=\"" + n["url"].InnerText + "\">" + n["text"].InnerText + "</a>";
+                writer.WriteLink(n["url"].InnerText, n["text"].InnerText);
             }
 
-            base.html += "</div>";
-		}
+            writer.WriteNextEnd();
 
-        private const string FILE_NAME = "/links.xml";
+            html = writer.GetHtml();
+		}
 	}
 }
 

@@ -72,6 +72,7 @@ namespace UnitTests
             Directory.CreateDirectory(TEST_DIR);
             File.WriteAllText(DocumentNames.GetPath(TEST_DIR, DocumentNames.LINKS_DOC), LINKS_DATA);
             File.WriteAllText(DocumentNames.GetPath(TEST_DIR, DocumentNames.CONTACT_DOC), CONTACT_DATA);
+            File.WriteAllText(DocumentNames.GetPath(TEST_DIR, DocumentNames.XP_DOC), XP_DATA);
             suiteTester = new AssertionTester(0);
             suiteTester.WriteBeginTestSuite("Begin Generator Tests...");
         }
@@ -129,11 +130,13 @@ namespace UnitTests
 
             AssertionTester tester = new AssertionTester(10);
             ExperienceGenerator xp = new ExperienceGenerator(TEST_DIR);
+            Console.WriteLine(xp.GetHtml());
 
             tester.WriteBeginTestSuite("Begin ExperienceGenerator Tests...");
             tester.AssertResult("Attendent job line exists", 
-                                xp.GetHtml().Contains("<div class=\"job-title\">Attendant</div>"));
-            tester.AssertResult("Points generated correctly", xp.GetHtml().Contains("<li>That one great thing you did</li>"));
+                                xp.GetHtml().Contains("<div class=\"job-title\">\nAttendant</div>"));
+            tester.AssertResult("Points generated correctly", 
+                                xp.GetHtml().Contains("<li>That one great thing you did</li>"));
 
             tester.WriteTestSuiteResult();
             if (!tester.passing) { suiteTester.passing = false; }

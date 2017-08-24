@@ -12,23 +12,34 @@ namespace ResumeGenerator
         
         public ContactGenerator(string directory, bool verifyEmail) : base(ReplacementTags.CONTACT_TAG)
         {
-            html = "<div class=\"contact\">\n\t<ul>";
-
-            HandleDocument(directory, verifyEmail);
-
-            html += "\t</ul>\n</div>";
+			XmlDocument doc = new XmlDocument();
+			doc.Load(DocumentNames.GetPath(directory, DocumentNames.CONTACT_DOC));
+            WriteDocument(doc, verifyEmail);
         }
 
         public ContactGenerator(string document) : base(ReplacementTags.CONTACT_TAG)
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(document);
+            WriteDocument(doc, true);
+        }
+
+        void WriteDocument(XmlDocument doc, bool verifyEmail)
+        {
+			writer.WriteBeginTag("div", "contact");
+			writer.WriteBeginTag("ul");
+
 			XmlNodeList list = doc.FirstChild.ChildNodes;
 			foreach (XmlNode n in list)
 			{
-                GenerateLine(n, true);
-			}
-        }
+                GenerateLine(n, verifyEmail);
+            }
+
+            writer.WriteAllEnds();
+            html = writer.GetHtml();
+		}
+
+        HtmlWriter writer = new HtmlWriter();
 
 		// email regex courtesy of http://emailregex.com/
 		const string EMAIL_REGEX = 
@@ -37,17 +48,6 @@ namespace ResumeGenerator
             "*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
 
         public const string INVALID_EMAIL_MESSAGE = "Email in contact.xml is invalid";
-
-        void HandleDocument(string directory, bool verifyEmail)
-        {
-			XmlDocument doc = new XmlDocument();
-            doc.Load(DocumentNames.GetPath(directory, DocumentNames.CONTACT_DOC));
-            XmlNodeList list = doc.FirstChild.ChildNodes;
-            foreach (XmlNode n in list)
-			{
-                GenerateLine(n, verifyEmail);
-			}
-        }
 
         void GenerateLine(XmlNode node, bool verifyEmail)
         {
@@ -76,7 +76,9 @@ namespace ResumeGenerator
 
         void InsertListItem(string text)
         {
-            html += "<li>" + text + "</li>\n";
+            writer.WriteSingleLineTag("li");
+            writer.WriteContent(text);
+            writer.WriteNextEnd();
         }
 
         void HandleUSAddress(XmlNode node)
