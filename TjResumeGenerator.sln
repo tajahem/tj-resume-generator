@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalHtmlGenerator", "TjResumeGenerator\FinalHtmlGenerator.csproj", "{56BF96A2-AE47-429F-A15C-F80FF497A7DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumeGenerator", "TjResumeGenerator\ResumeGenerator.csproj", "{56BF96A2-AE47-429F-A15C-F80FF497A7DC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5AA6055-7C7B-4DB3-9DE2-EDB8529E93F3}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTest\UnitTests.csproj", "{4D29743F-FC87-4334-BD67-556041C464D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{56BF96A2-AE47-429F-A15C-F80FF497A7DC}.Debug|x86.Build.0 = Debug|x86
 		{56BF96A2-AE47-429F-A15C-F80FF497A7DC}.Release|x86.ActiveCfg = Release|x86
 		{56BF96A2-AE47-429F-A15C-F80FF497A7DC}.Release|x86.Build.0 = Release|x86
+		{4D29743F-FC87-4334-BD67-556041C464D1}.Debug|x86.ActiveCfg = Debug|x86
+		{4D29743F-FC87-4334-BD67-556041C464D1}.Debug|x86.Build.0 = Debug|x86
+		{4D29743F-FC87-4334-BD67-556041C464D1}.Release|x86.ActiveCfg = Release|x86
+		{4D29743F-FC87-4334-BD67-556041C464D1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
