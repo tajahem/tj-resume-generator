@@ -8,11 +8,15 @@ namespace UnitTests
     public class GeneratorUnitTests : UnitTest
     {
         
-        public GeneratorUnitTests()
+        public GeneratorUnitTests(bool keep)
         {
+            this.keep = keep;
         }
 
+        bool keep;
+
         const string TEST_DIR = "test";
+        const string KEEP_DIR = "lastTest";
 
         AssertionTester suiteTester;
         ArrayList tests = new ArrayList();
@@ -20,9 +24,9 @@ namespace UnitTests
         public override void Setup()
         {
 			Directory.CreateDirectory(TEST_DIR);
-            tests.Add(new LinksGeneratorTest(TEST_DIR));
-            tests.Add(new ContactGeneratorTest(TEST_DIR));
-            tests.Add(new XpGeneratorTest(TEST_DIR));
+            tests.Add(new LinksGeneratorTest(TEST_DIR, keep));
+            tests.Add(new ContactGeneratorTest(TEST_DIR, keep));
+            tests.Add(new XpGeneratorTest(TEST_DIR, keep));
 			suiteTester = new AssertionTester(0);
 			suiteTester.WriteBeginTestSuite("Begin Generator Tests...");
         }
@@ -38,11 +42,19 @@ namespace UnitTests
 
         public override void Cleanup()
         {
-            Directory.Delete(TEST_DIR, true);
-            suiteTester.WriteTestSuiteResult();
+            foreach(UnitTest t in tests){
+                t.Cleanup();
+            }
+            if (!keep){
+                Directory.Delete(TEST_DIR, true);
+                suiteTester.WriteTestSuiteResult();
+            } else {
+				if (Directory.Exists(KEEP_DIR)){
+					Directory.Delete(KEEP_DIR, true);
+				}
+                Directory.Move(TEST_DIR, KEEP_DIR);
+            }
         }
-
-        // END TESTS
 
     }
 }

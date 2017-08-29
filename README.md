@@ -155,7 +155,7 @@ The about section is a simple html section allowing you to write an objective, s
 
 ### skills.xml
 
-The skills you wish to highlight. The root node needs to be **skills** and each skill is encapsulated in a **skill** element. The allowable sub elements include:
+The skills you wish to highlight. It allows for some additional flavor attributes that are best used with styling that makes the elements hoverable or collapseable. The root node needs to be **skills** and each skill is encapsulated in a **skill** element. The allowable sub elements include:
 
 - name **required**
 - category **required**
@@ -163,7 +163,7 @@ The skills you wish to highlight. The root node needs to be **skills** and each 
 - mastery
 - comment
 
-example:
+**example input:**
 
 	<skills>
 		<skill>
@@ -177,9 +177,46 @@ example:
 			<category>Technical Skills</category>
 			<percentage>75</percentage>
 			<mastery>Advanced</mastery>
-			<comments>Some proficiency with JQuery, JSON and Ajax</comments>
+			<comments>Expereince working with JQuery, JSON and Ajax</comments>
+		</skill>
+		<skill>
+			<name>Monodevelop</name>
+			<category>Tools</category>
+			<percentage>25</percentage>
+			<mastery>Beginner</mastery>
 		</skill>
 	</skills>
+	
+**example output:**
+	
+	<div class="skill-category">
+		<div class="skill-category-title">Technical Skills</div>
+		<div class="skill">
+			<div class="skill-name">C#</div>
+			<div class="skill-percentage-bar">
+				<div style="width: 20%;"></div>
+			</div>
+			<div class="skill-mastery">Beginner</div>
+		</div>
+		<div class="skill">
+			<div class="skill-name">Javascript</div>
+			<div class="skill-percentage-bar">
+				<div style="width: 75%;"></div>
+			</div>
+			<div class="skill-mastery">Advanced</div>
+			<div class="skill-comment">Expereince working with JQuery, JSON and Ajax</div>
+		</div>
+	</div>
+	<div class="skill-category">
+		<div class="skill-category-title">Tools</div>
+		<div class="skill">
+			<div class="skill-name">Monodevelop</div>
+			<div class="skill-percentage-bar">
+				<div style="width: 25%;"></div>
+			</div>
+			<div class="skill-mastery">Beginner</div>
+		</div>
+	</div>
 	
 ### experience.xml
 

@@ -7,12 +7,15 @@ namespace GeneratorTests
 {
     public class XpGeneratorTest : UnitTest
     {
-        public XpGeneratorTest(string directory)
+        public XpGeneratorTest(string directory, bool keep)
         {
             this.directory = directory;
+            keepOutput = keep;
         }
 
+        bool keepOutput;
         string directory;
+        ExperienceGenerator xp;
 
 		const string XP_DATA =
 			@"<xp>
@@ -38,23 +41,25 @@ namespace GeneratorTests
         public override bool Test()
         {
 			AssertionTester tester = new AssertionTester(10);
-            ExperienceGenerator xp = new ExperienceGenerator(directory);
+            xp = new ExperienceGenerator(directory);
 
 			tester.WriteBeginTestSuite("Begin ExperienceGenerator Tests...");
 			tester.AssertResult("Attendent job line exists",
-								xp.GetHtml().Contains("<div class=\"job-title\">\nAttendant</div>"));
+								xp.GetHtml().Contains("<div class=\"job-title\">Attendant</div>"));
 			tester.AssertResult("Points generated correctly",
 								xp.GetHtml().Contains("<li>That one great thing you did</li>"));
 
 			tester.WriteTestSuiteResult();
+
 			if (!tester.passing) { return false; }
             return true;
-
 		}
 
         public override void Cleanup()
         {
-            // nothing to do here as the suite will remove the parent directory
+			if (keepOutput){
+				File.WriteAllText(DocumentNames.GetPath(directory, "xp.html"), xp.GetHtml());
+			}
         }
     }
 }

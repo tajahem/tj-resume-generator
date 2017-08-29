@@ -7,12 +7,15 @@ namespace GeneratorTests
 {
     public class ContactGeneratorTest : UnitTest
     {
-        public ContactGeneratorTest(string directory)
+        public ContactGeneratorTest(string directory, bool keep)
         {
             this.directory = directory;
+            keepOutput = keep;
         }
 
         string directory;
+        bool keepOutput;
+        ContactGenerator contact;
 
 		const string CONTACT_DATA =
 	        @"<contact>
@@ -32,12 +35,7 @@ namespace GeneratorTests
 			@"<contact>
                 <email>invalid@invalid</email>
             </contact>";
-
-        public override void Cleanup()
-        {
-            // Nothing to do here as the suite will remove the parent directory
-        }
-
+        
         public override void Setup()
         {
             File.WriteAllText(DocumentNames.GetPath(directory, DocumentNames.CONTACT_DOC), CONTACT_DATA);
@@ -46,7 +44,7 @@ namespace GeneratorTests
         public override bool Test()
         {
 			AssertionTester tester = new AssertionTester(10);
-            ContactGenerator contact = new ContactGenerator(directory, true);
+            contact = new ContactGenerator(directory, true);
 
 			tester.WriteBeginTestSuite("Begin ContactsGenerator Tests...");
 			tester.AssertResult("Contact class exists", contact.GetHtml().Contains("<div class=\"contact\">"));
@@ -66,5 +64,12 @@ namespace GeneratorTests
 			if (!tester.passing) { return false; }
             return true;
         }
+
+		public override void Cleanup()
+		{
+			if (keepOutput){
+				File.WriteAllText(DocumentNames.GetPath(directory, "contact.html"), contact.GetHtml());
+			}
+		}
     }
 }

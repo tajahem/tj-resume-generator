@@ -14,9 +14,12 @@ namespace UnitTests
     {
         public static void Main(string[] args)
         {
+            // v this is terrible get rid of it soon
+            bool keep = args.Length != 0;
+            // ^
             bool status = true;
             ArrayList tests = new ArrayList();
-            tests.Add(new GeneratorUnitTests());
+            tests.Add(new GeneratorUnitTests(keep));
 
             foreach(UnitTest t in tests){
                 t.Setup();

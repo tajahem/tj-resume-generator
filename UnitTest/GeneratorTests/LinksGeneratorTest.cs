@@ -7,12 +7,15 @@ namespace GeneratorTests
 {
     public class LinksGeneratorTest : UnitTest
     {
-        public LinksGeneratorTest(string directory)
+        public LinksGeneratorTest(string directory, bool keep)
         {
             this.directory = directory;
+            keepOutput = keep;
         }
 
+        bool keepOutput;
         string directory;
+        LinksGenerator linksTest;
 
 		const string LINKS_DATA =
 			@"<links>
@@ -28,7 +31,9 @@ namespace GeneratorTests
 
         public override void Cleanup()
         {
-            // Nothing to do here as the suite class will delete the directory
+			if (keepOutput){
+				File.WriteAllText(DocumentNames.GetPath(directory, "links.html"), linksTest.GetHtml());
+			}
         }
 
         public override void Setup()
@@ -39,7 +44,7 @@ namespace GeneratorTests
         public override bool Test()
         {
 			AssertionTester tester = new AssertionTester(10);
-            LinksGenerator linksTest = new LinksGenerator(directory);
+            linksTest = new LinksGenerator(directory);
 
 			tester.WriteBeginTestSuite("Begin LinksGenerator Tests...");
 			tester.AssertResult("ID is present", linksTest.GetHtml().Contains("links-section"));
