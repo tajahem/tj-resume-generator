@@ -64,6 +64,16 @@ namespace ResumeGenerator
             html.Append(text);
         }
 
+        public void WriteTabs()
+        {
+            html.Append(GetTabs());
+        }
+
+        public void WriteNewLine()
+        {
+            html.Append(Environment.NewLine);
+        }
+
         public void WriteContentOnNewline(string text){
             html.Append(Environment.NewLine + GetTabs() + text + Environment.NewLine);
         }

@@ -27,6 +27,7 @@ namespace UnitTests
             tests.Add(new LinksGeneratorTest(TEST_DIR, keep));
             tests.Add(new ContactGeneratorTest(TEST_DIR, keep));
             tests.Add(new XpGeneratorTest(TEST_DIR, keep));
+            tests.Add(new SkillGeneratorTest(TEST_DIR, keep));
 			suiteTester = new AssertionTester(0);
 			suiteTester.WriteBeginTestSuite("Begin Generator Tests...");
         }
@@ -37,6 +38,7 @@ namespace UnitTests
                 t.Setup();
                 if (!t.Test()) { suiteTester.passing = false; }
             }
+            suiteTester.WriteTestSuiteResult();
             return suiteTester.passing;
         }
 

@@ -189,32 +189,34 @@ The skills you wish to highlight. It allows for some additional flavor attribute
 	
 **example output:**
 	
-	<div class="skill-category">
-		<div class="skill-category-title">Technical Skills</div>
-		<div class="skill">
-			<div class="skill-name">C#</div>
-			<div class="skill-percentage-bar">
-				<div style="width: 20%;"></div>
+	<div id="skills">
+		<div class="skill-category">
+			<div class="skill-category-title">Technical Skills</div>
+			<div class="skill">
+				<div class="skill-name">C#</div>
+				<div class="skill-percentage-bar">
+					<div style="width: 20%;"></div>
+				</div>
+				<div class="skill-mastery">Beginner</div>
 			</div>
-			<div class="skill-mastery">Beginner</div>
+			<div class="skill">
+				<div class="skill-name">Javascript</div>
+				<div class="skill-percentage-bar">
+					<div style="width: 75%;"></div>
+				</div>
+				<div class="skill-mastery">Advanced</div>
+				<div class="skill-comment">Expereince working with JQuery, JSON and Ajax</div>
+			</div>
 		</div>
-		<div class="skill">
-			<div class="skill-name">Javascript</div>
-			<div class="skill-percentage-bar">
-				<div style="width: 75%;"></div>
+		<div class="skill-category">
+			<div class="skill-category-title">Tools</div>
+			<div class="skill">
+				<div class="skill-name">Monodevelop</div>
+				<div class="skill-percentage-bar">
+					<div style="width: 25%;"></div>
+				</div>
+				<div class="skill-mastery">Beginner</div>
 			</div>
-			<div class="skill-mastery">Advanced</div>
-			<div class="skill-comment">Expereince working with JQuery, JSON and Ajax</div>
-		</div>
-	</div>
-	<div class="skill-category">
-		<div class="skill-category-title">Tools</div>
-		<div class="skill">
-			<div class="skill-name">Monodevelop</div>
-			<div class="skill-percentage-bar">
-				<div style="width: 25%;"></div>
-			</div>
-			<div class="skill-mastery">Beginner</div>
 		</div>
 	</div>
 	

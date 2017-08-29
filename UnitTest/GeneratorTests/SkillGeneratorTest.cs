@@ -8,12 +8,15 @@ namespace GeneratorTests
 {
     public class SkillGeneratorTest : UnitTest
     {
-        public SkillGeneratorTest(string directory)
+        public SkillGeneratorTest(string directory, bool keep)
         {
             this.directory = directory;
+            keepOutput = keep;
         }
 
         string directory;
+        SkillsGenerator skills;
+        bool keepOutput;
 
 		const string SKILLS_DATA = 
             @"<skills>
@@ -38,7 +41,12 @@ namespace GeneratorTests
                 </skill>
             </skills>";
 
-        public override void Cleanup(){} // not needed
+        public override void Cleanup()
+        {
+            if(keepOutput){
+                File.WriteAllText(DocumentNames.GetPath(directory, "skills.html"), skills.GetHtml());
+            }
+        }
 
 		public override void Setup()
         {
@@ -48,32 +56,45 @@ namespace GeneratorTests
         public override bool Test()
         {
             AssertionTester tester = new AssertionTester(10);
-            SkillsGenerator skills = new SkillsGenerator(directory);
+            skills = new SkillsGenerator(directory);
 
             tester.WriteBeginTestSuite("Skills Generator Tests...");
             tester.AssertResult("Only one technical skills title", 
-                                XMatchesOnly(skills.GetHtml(), "Technical Skills", 1));
+                                XMatchesOnly(skills.GetHtml(), 
+                                    "<div class=\"skill-category-title\">Technical Skills</div>", 1));
             tester.AssertResult("Two skill-categories exist", 
-                                XMatchesOnly(skills.GetHtml(), "skill-category", 2));
+                                XMatchesOnly(skills.GetHtml(), "class=\"skill-category\"", 2));
             // contains skill-name and data
-            tester.AssertResult("Skill name is correctly formatted", false);
+            tester.AssertResult("Skill name is correctly formatted", DivExists("name", "C#"));
             // contains skill-mastery and data
+            tester.AssertResult("Skill mastery is correctly formatted", DivExists("mastery", "Beginner"));
             // contains skill-comment and data
+            string comment = "Expereince working with JQuery, JSON and Ajax";
+            tester.AssertResult("Skill comment is correctly formatted", DivExists("comments", comment));
             // percentage bar is correctly formatted
-
-
-
+            tester.AssertResult("Percentage Bar is correctly formatted",
+                                skills.GetHtml().Contains(FormattedBar()));
             tester.WriteTestSuiteResult();
             if (!tester.passing) { return false; }
             return true;
+        }
+
+        bool DivExists(string className, string text)
+        {
+            string t = "<div class=\"skill-" + className + "\">" + text + "</div>";
+            return skills.GetHtml().Contains(t);
+        }
+
+        string FormattedBar()
+        {
+			string barBg = "\t\t\t<div class=\"skill-percentage-bar\">";
+			string innerBar = "\t\t\t\t<div style=\"width: 25;\"></div>";
+            return barBg + Environment.NewLine + innerBar + Environment.NewLine + "\t\t\t</div>";
         }
 
         bool XMatchesOnly(string source, string sub, int amount){
             return Regex.Matches(source, sub).Count == amount;
         }
 
-        bool ContainsClassAndData(string source, string className, string data){
-            return (!source.Contains(className) && !source.Contains(data));
-        }
     }
 }
