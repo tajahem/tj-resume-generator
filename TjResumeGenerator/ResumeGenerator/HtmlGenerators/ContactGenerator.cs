@@ -76,9 +76,7 @@ namespace ResumeGenerator
 
         void InsertListItem(string text)
         {
-            writer.WriteSingleLineTag("li");
-            writer.WriteContent(text);
-            writer.WriteNextEnd();
+            writer.WriteSingleLineTag("li", text);
         }
 
         void HandleUSAddress(XmlNode node)

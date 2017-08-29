@@ -41,9 +41,7 @@ namespace ResumeGenerator
 
         void WriteDiv(XmlNode node, string name)
         {
-			writer.WriteBeginTag("div", "job-" + name);
-			writer.WriteContent(node[name].InnerText);
-			writer.WriteNextEnd();
+            writer.WriteSingleLineTag("div", "job-" + name, node[name].InnerText);
         }
 
 		void WritePoints(XmlNode node)
@@ -55,9 +53,7 @@ namespace ResumeGenerator
 				writer.WriteBeginTag("ul");
 				foreach (XmlNode p in points)
 				{
-					writer.WriteSingleLineTag("li");
-					writer.WriteContent(p.InnerText);
-					writer.WriteNextEnd();
+                    writer.WriteSingleLineTag("li", p.InnerText);
 				}
 				writer.WriteNextEnd(); // end ul
 			}
