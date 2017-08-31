@@ -16,6 +16,7 @@ While the eventual goal is to create a gui to manufacture the source files used 
 		_education.html
 		_cover.html
 		_order.html
+		_name.html
 	xml
 		contact.xml
 		greeting.xml
@@ -41,7 +42,6 @@ The raw html file, named **raw.html**, contains the boiler plate html and insert
 	<!--INSERT GREETING-->
 	<!--INSERT LINKS-->
 	<!--INSERT SECTIONS-->
-	<!--INSERT NAME-->
 	
 Other than that requirement the document can be whatever you want.
 
@@ -132,22 +132,40 @@ This is the contact information and greeting line of the cover letter. The root 
 The sub elements allowed are:
 
 - name **(required)**
-- street
-- city
-- state/province
-- zipcode
+- us-address
+	- street
+	- city
+	- state/province
+	- zipcode
 - salutation **(required)**
 
 **example input:**
 
 	<greeting>
 		<name>Awesome Company Name</name>
-		<street>556 Madeup St.</street>
-		<city>Lincoln</city>
-		<state>NE</state>
-		<zipcode>68588</zipcode>
+		<us-address>
+			<street>556 Madeup St.</street>
+			<city>Lincoln</city>
+			<state>NE</state>
+			<zipcode>68588</zipcode>
+		</us-address>
 		<salutation>Dear Hiring Manager;</salutation>
 	</greeting>
+	
+**example output**
+
+	<div id="greeting">
+		<div id="company-contact">
+			<ul>
+				<li>Awesome Company Name</li>
+				<li>556 Madeup St.</li>
+				<li>LIncoln, NE 68588</li>
+			</ul>
+		</div>
+		<div id="salutation">
+			<div>Dear Hiring Manager;</div>
+		</div>
+	</div>
 
 ### about.html
 

@@ -35,6 +35,8 @@
     <Compile Include="GeneratorTests\ContactGeneratorTest.cs" />
     <Compile Include="GeneratorTests\XpGeneratorTest.cs" />
     <Compile Include="GeneratorTests\SkillGeneratorTest.cs" />
+    <Compile Include="GeneratorTests\GreetingGeneratorTest.cs" />
+    <Compile Include="RawHtmlLoaderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

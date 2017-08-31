@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<greeting>
+    <name>Awesome Company Name</name>
+    <us-address>
+        <street>556 Madeup St.</street>
+        <city>Lincoln</city>
+        <state>NE</state>
+        <zipcode>68588</zipcode>
+    </us-address>
+    <salutation>Dear Hiring Manager;</salutation>
+</greeting>

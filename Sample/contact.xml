@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contact>
+    <us-address>
+        <street>555 Madeup St.</street>
+        <city>Lincoln</city>
+        <state>NE</state>
+        <zipcode>68588</zipcode>
+    </us-address>
+    <phone>
+        <number>1.555.555.1111</number>
+        <type>Home</type>
+    </phone>
+    <email>example@example.com</email>
+</contact>

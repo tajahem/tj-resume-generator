@@ -18,21 +18,26 @@ namespace UnitTests
             bool keep = args.Length != 0;
             // ^
             bool status = true;
-            ArrayList tests = new ArrayList();
-            tests.Add(new GeneratorUnitTests(keep));
-
-            foreach(UnitTest t in tests){
+            ArrayList tests = new ArrayList
+            {
+                new GeneratorUnitTests(keep),
+                new RawHtmlLoaderTest()
+            };
+            foreach (UnitTest t in tests)
+            {
                 t.Setup();
-                if (!t.Test()) { status = false; }
+                status &= t.Test();
                 t.Cleanup();
             }
 
-            if(status){
+            if (status)
+            {
                 Console.WriteLine("Build Passes");
-            }else{
+            }
+            else
+            {
                 Console.WriteLine("Build Fails");
             }
-
         }
     }
 }

@@ -13,15 +13,15 @@ namespace ResumeGenerator
         public RawHtmlLoader(string dirName)
         {
             order = new SectionOrder(dirName);
-            htmlDoc = File.ReadAllText(dirName + DocumentNames.RAW_HTML);
-            htmlDoc.Replace(INSERT_TAG, order.order);
+            htmlDoc = File.ReadAllText(DocumentNames.GetPath(dirName, DocumentNames.RAW_HTML));
+            htmlDoc = htmlDoc.Replace(INSERT_TAG, order.order);
         }
 
         // The section order tag etc. are located locally because they absolutely must occur before
         // anything else or everything falls apart.
-        private const string INSERT_TAG = "<!--INSERT SECTIONS-->";
+        const string INSERT_TAG = "<!--INSERT SECTIONS-->";
 
-        private SectionOrder order;
+        SectionOrder order;
         public string htmlDoc;
 
     }
@@ -30,18 +30,18 @@ namespace ResumeGenerator
     {
         public SectionOrder(string dirName)
         {
-            ReadOrder(dirName + DocumentNames.ORDER_DOC);
+            ReadOrder(DocumentNames.GetPath(dirName, DocumentNames.ORDER_DOC));
             if (!VerifyTags()) { throw new Exception("order.html is invalid"); }
         }
 
         public string order;
 
-        private void ReadOrder(string file)
+        void ReadOrder(string file)
         {
             order = File.ReadAllText(file);
         }
 
-        private bool VerifyTags()
+        bool VerifyTags()
         {
             bool allPresent = true;
             foreach (string s in ReplacementTags.SECTIONS)

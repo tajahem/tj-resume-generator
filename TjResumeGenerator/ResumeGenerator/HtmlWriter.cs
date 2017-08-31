@@ -18,7 +18,7 @@ namespace ResumeGenerator
         {
             html.Append(GetTabs() + "<" + tag + ">" + Environment.NewLine);
             tags.Push(tag);
-            ++tabLevel; 
+            ++tabLevel;
         }
 
         public void WriteBeginTag(string tag, string tagClass)
@@ -30,19 +30,19 @@ namespace ResumeGenerator
 
         public void WriteSingleLineTag(string tag, string content)
         {
-            html.Append(GetTabs() + "<" + tag + ">" + content + 
+            html.Append(GetTabs() + "<" + tag + ">" + content +
                         "</" + tag + ">" + Environment.NewLine);
         }
 
         public void WriteSingleLineTag(string tag, string tagClass, string content)
         {
-            html.Append(GetTabs()+ "<" + tag + " class=\"" + tagClass + "\">" + content 
+            html.Append(GetTabs() + "<" + tag + " class=\"" + tagClass + "\">" + content
                         + "</" + tag + ">" + Environment.NewLine);
         }
 
         public void WriteBeginTagWithId(string tag, string id)
         {
-            html.Append(GetTabs()+ "<" + tag + " id=\"" + id + "\">" + Environment.NewLine);
+            html.Append(GetTabs() + "<" + tag + " id=\"" + id + "\">" + Environment.NewLine);
             tags.Push(tag);
             ++tabLevel;
         }
@@ -74,8 +74,14 @@ namespace ResumeGenerator
             html.Append(Environment.NewLine);
         }
 
-        public void WriteContentOnNewline(string text){
+        public void WriteContentOnNewline(string text)
+        {
             html.Append(Environment.NewLine + GetTabs() + text + Environment.NewLine);
+        }
+
+        public void WriteComment(string text)
+        {
+            html.Append("<!--" + text + "-->");
         }
 
         public void WriteNextEnd()
@@ -86,7 +92,8 @@ namespace ResumeGenerator
 
         public void WriteAllEnds()
         {
-            while (tags.Count > 0){
+            while (tags.Count > 0)
+            {
                 WriteNextEnd();
             }
         }
@@ -96,9 +103,13 @@ namespace ResumeGenerator
             return html.ToString();
         }
 
-        string GetTabs(){
+
+
+        string GetTabs()
+        {
             StringBuilder t = new StringBuilder();
-            for (int i = 0; i < tabLevel; i++){
+            for (int i = 0; i < tabLevel; i++)
+            {
                 t.Append("\t");
             }
             return t.ToString();

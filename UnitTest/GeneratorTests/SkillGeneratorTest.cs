@@ -18,8 +18,9 @@ namespace GeneratorTests
         SkillsGenerator skills;
         bool keepOutput;
 
-		const string SKILLS_DATA = 
-            @"<skills>
+        const string SKILLS_DATA =
+            @"<?xml version=""1.0"" encoding=""UTF-8""?>
+            <skills>
                 <skill>
                     <name>C#</name>
                     <category>Technical Skills</category>
@@ -43,12 +44,13 @@ namespace GeneratorTests
 
         public override void Cleanup()
         {
-            if(keepOutput){
+            if (keepOutput)
+            {
                 File.WriteAllText(DocumentNames.GetPath(directory, "skills.html"), skills.GetHtml());
             }
         }
 
-		public override void Setup()
+        public override void Setup()
         {
             File.WriteAllText(DocumentNames.GetPath(directory, DocumentNames.SKILLS_DOC), SKILLS_DATA);
         }
@@ -59,10 +61,10 @@ namespace GeneratorTests
             skills = new SkillsGenerator(directory);
 
             tester.WriteBeginTestSuite("Skills Generator Tests...");
-            tester.AssertResult("Only one technical skills title", 
-                                XMatchesOnly(skills.GetHtml(), 
+            tester.AssertResult("Only one technical skills title",
+                                XMatchesOnly(skills.GetHtml(),
                                     "<div class=\"skill-category-title\">Technical Skills</div>", 1));
-            tester.AssertResult("Two skill-categories exist", 
+            tester.AssertResult("Two skill-categories exist",
                                 XMatchesOnly(skills.GetHtml(), "class=\"skill-category\"", 2));
             // contains skill-name and data
             tester.AssertResult("Skill name is correctly formatted", DivExists("name", "C#"));
@@ -87,12 +89,13 @@ namespace GeneratorTests
 
         string FormattedBar()
         {
-			string barBg = "\t\t\t<div class=\"skill-percentage-bar\">";
-			string innerBar = "\t\t\t\t<div style=\"width: 25;\"></div>";
+            string barBg = "\t\t\t<div class=\"skill-percentage-bar\">";
+            string innerBar = "\t\t\t\t<div style=\"width: 25;\"></div>";
             return barBg + Environment.NewLine + innerBar + Environment.NewLine + "\t\t\t</div>";
         }
 
-        bool XMatchesOnly(string source, string sub, int amount){
+        bool XMatchesOnly(string source, string sub, int amount)
+        {
             return Regex.Matches(source, sub).Count == amount;
         }
 

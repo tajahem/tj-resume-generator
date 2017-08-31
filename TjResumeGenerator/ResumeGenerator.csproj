@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -40,7 +39,6 @@
     <Compile Include="ResumeGenerator.cs" />
     <Compile Include="ResumeGenerator\HtmlGenerators\ExperienceGenerator.cs" />
     <Compile Include="ResumeGenerator\HtmlGenerators\SkillsGenerator.cs" />
-    <Compile Include="ResumeGenerator\ReplacementTags.cs" />
     <Compile Include="ResumeGenerator\HtmlGenerators\RawHtmlLoader.cs" />
     <Compile Include="ResumeGenerator\HtmlGenerators\LinksGenerator.cs" />
     <Compile Include="ResumeGenerator\HtmlGenerators\StaticHtmlGenerator.cs" />
@@ -48,6 +46,7 @@
     <Compile Include="ResumeGenerator\HtmlGenerators\GreetingGenerator.cs" />
     <Compile Include="ResumeGenerator\HtmlGenerators\HtmlGenerator.cs" />
     <Compile Include="ResumeGenerator\DocumentNames.cs" />
+    <Compile Include="ResumeGenerator\ReplacementTags.cs" />
     <Compile Include="ResumeGenerator\HtmlWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

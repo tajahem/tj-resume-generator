@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace ResumeGenerator
 {
-	public class SkillsGenerator : HtmlGenerator
-	{
+    public class SkillsGenerator : HtmlGenerator
+    {
 
-		public SkillsGenerator (string dirName) : base(ReplacementTags.SKILLS_TAG)
-		{
+        public SkillsGenerator(string dirName) : base(ReplacementTags.SKILLS_TAG)
+        {
             writer = new HtmlWriter();
             writer.WriteBeginTagWithId("div", "skills");
             XmlDocument doc = new XmlDocument();
@@ -17,23 +17,28 @@ namespace ResumeGenerator
             GenerateSkills(doc.SelectNodes("/skills/skill"));
             writer.WriteAllEnds();
             html = writer.GetHtml();
-		}
+        }
 
         HtmlWriter writer;
         Dictionary<string, SkillCategory> categories = new Dictionary<string, SkillCategory>();
 
         public void GenerateSkills(XmlNodeList nodes)
         {
-            foreach (XmlNode n in nodes){
+            foreach (XmlNode n in nodes)
+            {
                 Skill tmp = new Skill(n);
-                if(categories.ContainsKey(tmp.category)){
+                if (categories.ContainsKey(tmp.category))
+                {
                     categories[tmp.category].AddSkill(tmp);
-                }else{
+                }
+                else
+                {
                     categories.Add(tmp.category, new SkillCategory(tmp.category));
                     categories[tmp.category].AddSkill(tmp);
                 }
             }
-            foreach(SkillCategory category in categories.Values){
+            foreach (SkillCategory category in categories.Values)
+            {
                 category.WriteCategory(writer);
             }
         }
@@ -57,8 +62,9 @@ namespace ResumeGenerator
             {
                 writer.WriteBeginTag("div", "skill-category");
                 writer.WriteSingleLineTag("div", "skill-category-title", name);
-                foreach(Skill s in skills){
-                    s.WriteSkill(writer); 
+                foreach (Skill s in skills)
+                {
+                    s.WriteSkill(writer);
                 }
                 writer.WriteNextEnd();
             }
@@ -79,23 +85,26 @@ namespace ResumeGenerator
             {
                 writer.WriteBeginTag("div", "skill");
                 writer.WriteSingleLineTag("div", "skill-name", data["name"].InnerText);
-                if(data["percentage"] != null){
+                if (data["percentage"] != null)
+                {
                     writer.WriteBeginTag("div", "skill-percentage-bar");
                     writer.WriteTabs();
-                    writer.WriteContent("<div style=\"width: "+ data["percentage"].InnerText +
+                    writer.WriteContent("<div style=\"width: " + data["percentage"].InnerText +
                                         ";\"></div>");
                     writer.WriteNewLine();
                     writer.WriteNextEnd();
                 }
-                if(data["mastery"] != null){
+                if (data["mastery"] != null)
+                {
                     writer.WriteSingleLineTag("div", "skill-mastery", data["mastery"].InnerText);
                 }
-                if(data["comments"] != null){
+                if (data["comments"] != null)
+                {
                     writer.WriteSingleLineTag("div", "skill-comments", data["comments"].InnerText);
                 }
                 writer.WriteNextEnd();
             }
         }// end  skill
-	}
+    }
 }
 

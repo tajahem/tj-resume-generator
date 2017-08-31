@@ -3,11 +3,11 @@ using System.IO;
 using System.Collections;
 using GeneratorTests;
 
-namespace UnitTests 
+namespace UnitTests
 {
     public class GeneratorUnitTests : UnitTest
     {
-        
+
         public GeneratorUnitTests(bool keep)
         {
             this.keep = keep;
@@ -23,18 +23,20 @@ namespace UnitTests
 
         public override void Setup()
         {
-			Directory.CreateDirectory(TEST_DIR);
+            Directory.CreateDirectory(TEST_DIR);
             tests.Add(new LinksGeneratorTest(TEST_DIR, keep));
             tests.Add(new ContactGeneratorTest(TEST_DIR, keep));
             tests.Add(new XpGeneratorTest(TEST_DIR, keep));
             tests.Add(new SkillGeneratorTest(TEST_DIR, keep));
-			suiteTester = new AssertionTester(0);
-			suiteTester.WriteBeginTestSuite("Begin Generator Tests...");
+            tests.Add(new GreetingGeneratorTest(TEST_DIR, keep));
+            suiteTester = new AssertionTester(0);
+            suiteTester.WriteBeginTestSuite("Begin Generator Tests...");
         }
 
         public override bool Test()
         {
-            foreach(UnitTest t in tests){
+            foreach (UnitTest t in tests)
+            {
                 t.Setup();
                 if (!t.Test()) { suiteTester.passing = false; }
             }
@@ -44,16 +46,20 @@ namespace UnitTests
 
         public override void Cleanup()
         {
-            foreach(UnitTest t in tests){
+            foreach (UnitTest t in tests)
+            {
                 t.Cleanup();
             }
-            if (!keep){
+            if (!keep)
+            {
                 Directory.Delete(TEST_DIR, true);
-                suiteTester.WriteTestSuiteResult();
-            } else {
-				if (Directory.Exists(KEEP_DIR)){
-					Directory.Delete(KEEP_DIR, true);
-				}
+            }
+            else
+            {
+                if (Directory.Exists(KEEP_DIR))
+                {
+                    Directory.Delete(KEEP_DIR, true);
+                }
                 Directory.Move(TEST_DIR, KEEP_DIR);
             }
         }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skills>
+    <skill>
+        <name>C#</name>
+        <category>Technical Skills</category>
+        <percentage>20</percentage>
+        <mastery>Beginner</mastery>
+    </skill>
+    <skill>
+        <name>Javascript</name>
+        <category>Technical Skills</category>
+        <percentage>75</percentage>
+        <mastery>Advanced</mastery>
+        <comments>Expereince working with JQuery, JSON and Ajax</comments>
+    </skill>
+    <skill>
+        <name>Monodevelop</name>
+        <category>Tools</category>
+        <percentage>25</percentage>
+        <mastery>Beginner</mastery>
+    </skill>
+</skills>

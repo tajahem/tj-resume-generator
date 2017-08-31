@@ -9,11 +9,11 @@ namespace ResumeGenerator
     /// </summary>
     public class ContactGenerator : HtmlGenerator
     {
-        
+
         public ContactGenerator(string directory, bool verifyEmail) : base(ReplacementTags.CONTACT_TAG)
         {
-			XmlDocument doc = new XmlDocument();
-			doc.Load(DocumentNames.GetPath(directory, DocumentNames.CONTACT_DOC));
+            XmlDocument doc = new XmlDocument();
+            doc.Load(DocumentNames.GetPath(directory, DocumentNames.CONTACT_DOC));
             WriteDocument(doc, verifyEmail);
         }
 
@@ -26,23 +26,23 @@ namespace ResumeGenerator
 
         void WriteDocument(XmlDocument doc, bool verifyEmail)
         {
-			writer.WriteBeginTag("div", "contact");
-			writer.WriteBeginTag("ul");
+            writer.WriteBeginTag("div", "contact");
+            writer.WriteBeginTag("ul");
 
-			XmlNodeList list = doc.FirstChild.ChildNodes;
-			foreach (XmlNode n in list)
-			{
+            XmlNodeList list = doc.SelectSingleNode("/contact").ChildNodes;
+            foreach (XmlNode n in list)
+            {
                 GenerateLine(n, verifyEmail);
             }
 
             writer.WriteAllEnds();
             html = writer.GetHtml();
-		}
+        }
 
         HtmlWriter writer = new HtmlWriter();
 
-		// email regex courtesy of http://emailregex.com/
-		const string EMAIL_REGEX = 
+        // email regex courtesy of http://emailregex.com/
+        const string EMAIL_REGEX =
             "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}" +
             "\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]" +
             "*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
@@ -59,16 +59,18 @@ namespace ResumeGenerator
                 case "us-address":
                     HandleUSAddress(node);
                     break;
-                case "email" :
-                    if(verifyEmail){
+                case "email":
+                    if (verifyEmail)
+                    {
                         Regex r = new Regex(EMAIL_REGEX);
-                        if(!r.IsMatch(node.InnerText)){
+                        if (!r.IsMatch(node.InnerText))
+                        {
                             throw new Exception(INVALID_EMAIL_MESSAGE);
                         }
                     }
                     InsertListItem(node.InnerText);
                     break;
-                case "other" :
+                case "other":
                     InsertListItem(node.InnerText);
                     break;
             }
@@ -81,16 +83,16 @@ namespace ResumeGenerator
 
         void HandleUSAddress(XmlNode node)
         {
-			if (node["street"] != null)
-			{
-				InsertListItem(node["street"].InnerText);
-			}
-			if (node["po-box"] != null)
-			{
-				InsertListItem(node["po-box"].InnerText);
-			}
-			InsertListItem(node["city"].InnerText + ", " + node["state"].InnerText + " " +
-										 node["zipcode"].InnerText);
+            if (node["street"] != null)
+            {
+                InsertListItem(node["street"].InnerText);
+            }
+            if (node["po-box"] != null)
+            {
+                InsertListItem(node["po-box"].InnerText);
+            }
+            InsertListItem(node["city"].InnerText + ", " + node["state"].InnerText + " " +
+                                         node["zipcode"].InnerText);
         }
     }
 }
