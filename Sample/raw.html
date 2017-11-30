@@ -9,8 +9,16 @@
     </style>
   </head>
   <body>
-    <div id="cover">
-      <!--INSERT NAME-->
+    <div id="cover" class="main-content">
+      <div id="cover-controls" class="controls">
+          <div class="button expand-button" onclick='expandControls("cover-controls", true);'>v</div>
+          <div class="controls-buttons">
+            <div class="button" onclick="expandControls('cover-controls', false);swapCover(true);">View Resume</div>
+            <hr />
+            <div class="button" onclick="expandControls('cover-controls', false);">^</div>
+          </div>
+      </div>
+      <div class="name right"><!--INSERT NAME--></div>
       <!--INSERT CONTACT-->
       <!--INSERT GREETING-->
       <!--INSERT COVER-->
@@ -18,14 +26,23 @@
         <div class="complimentary-close">Sincerely,</div>
         <div class="name"><!--INSERT NAME--></div>
       </div>
+      <div class="button centered-button" onclick="swapCover(true)">View Resume</div>
     </div>
-    <div id="resume">
+    <div id="resume" class="main-content">
+      <div id="resume-controls" class="controls">
+        <div class="button expand-button" onclick="expandControls('resume-controls', true);">v</div>
+        <div class="controls-buttons">
+          <div class="button control-button" onclick="expandControls('resume-controls', false);swapCover(false);">View Cover Letter</div>
+          <hr />
+          <div class="button control-button" onclick="expandControls('resume-controls', false);">^</div>
+        </div>
+      </div>
       <div class="sidebar">
-        <!--INSERT NAME-->
+        <div class="name large-name"><!--INSERT NAME--></div>
         <!--INSERT CONTACT-->
         <!--INSERT LINKS-->
       </div>
-      <div class="resume-main">
+      <div class="sections">
         <!--INSERT SECTIONS-->
       </div>
     </div>

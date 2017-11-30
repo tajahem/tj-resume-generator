@@ -85,6 +85,7 @@ namespace ResumeGenerator
             {
                 writer.WriteBeginTag("div", "skill");
                 writer.WriteSingleLineTag("div", "skill-name", data["name"].InnerText);
+                writer.WriteBeginTag("div", "skill-properties");
                 if (data["percentage"] != null)
                 {
                     writer.WriteBeginTag("div", "skill-percentage-bar");
@@ -102,6 +103,7 @@ namespace ResumeGenerator
                 {
                     writer.WriteSingleLineTag("div", "skill-comments", data["comments"].InnerText);
                 }
+                writer.WriteNextEnd();
                 writer.WriteNextEnd();
             }
         }// end  skill

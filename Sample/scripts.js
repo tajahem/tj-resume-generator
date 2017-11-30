@@ -40,3 +40,9 @@ function expandControls(id, direction) {
   direction ? swap(id, "expand-button", "controls-buttons") : swap(id, "controls-buttons", "expand-button");
               
 }
+
+window.onbeforeunload = function(){
+    expandControls('resume-controls', false);
+    swapCover(false);
+    console.log("reload");
+}

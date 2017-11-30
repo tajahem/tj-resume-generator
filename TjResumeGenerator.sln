@@ -7,6 +7,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
 		README.md = README.md
+		Sample\_about.html = Sample\_about.html
+		Sample\contact.xml = Sample\contact.xml
+		Sample\_cover.html = Sample\_cover.html
+		Sample\_education.html = Sample\_education.html
+		Sample\experience.xml = Sample\experience.xml
+		Sample\greeting.xml = Sample\greeting.xml
+		Sample\links.xml = Sample\links.xml
+		Sample\_name.html = Sample\_name.html
+		Sample\_order.html = Sample\_order.html
+		Sample\raw.html = Sample\raw.html
+		Sample\scripts.js = Sample\scripts.js
+		Sample\skills.xml = Sample\skills.xml
+		Sample\style.css = Sample\style.css
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTest\UnitTests.csproj", "{4D29743F-FC87-4334-BD67-556041C464D1}"
